@@ -1,0 +1,41 @@
+- name: Save our train
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: start docker 
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+    - name: docker compose 
+      docker_compose:
+        project_name: cod_ansible
+        definition:
+          version: "3.7"
+          services:
+            nginx:
+              image: nginx:latest
+              container_name: nginx
+              restart: always
+              ports:
+                - "80:80"
+              volumes:
+                - "{{playbook_dir}}/code:/code"
+                - "{{playbook_dir}}/sites-available/:/etc/nginx/conf.d/"
+              environment:
+                - NGINX_HOST=localhost
+              networks:
+                - youcan
+            php:
+              image: php:7-fpm
+              container_name: php
+              restart: always
+              volumes:
+                - "{{playbook_dir}}/code:/code"
+              networks:
+                - youcan
+          networks:
+            youcan:
+              driver: bridge
