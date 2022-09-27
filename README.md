@@ -39,5 +39,5 @@ vim /etc/hosts
 To deploy our application by launching our playbook with the following command:
 
 ```sh
-ansible-playbook -i 00_inventory.yml  playbook.yml 
+ansible-playbook playbook.yml 
 ```
