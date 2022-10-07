@@ -1,6 +1,6 @@
 # Coding challenge II: Save our deploy train
  
-In this coding challenge, we used ansible and docker-compose to deploy these two containers: **PHP and Nginx**.
+In this coding challenge, we have used ansible and docker-compose to deploy these two containers: **PHP and Nginx**.
 
 ### Objective:
 
